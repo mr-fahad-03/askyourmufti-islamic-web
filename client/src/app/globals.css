@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-playfair);
+
+  --color-primary: #064E3B;
+  --color-primary-light: #065F46;
+  --color-primary-dark: #022C22;
+
+  --color-accent: #B45309;
+  --color-accent-light: #D97706;
+
+  --color-ivory: #FDFCF8;
+  --color-sand: #F3F1E8;
+}
+
+:root {
+  --background: #FDFCF8;
+  --foreground: #1F2937;
+
+  --primary: #064E3B;
+  --primary-foreground: #FDFCF8;
+
+  --accent: #B45309;
+  --accent-foreground: #FDFCF8;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #022C22;
+    --foreground: #FDFCF8;
+
+    --primary: #10B981;
+    --primary-foreground: #022C22;
+  }
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-serif);
+}
+
+/* Custom Utilities for Premium Look */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark .glass {
+  background: rgba(2, 44, 34, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-border {
+  border: 2px solid transparent;
+  background-image: linear-gradient(var(--background), var(--background)),
+    linear-gradient(135deg, #B45309, #D97706, #B45309);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+}
+
+@keyframes slow-zoom {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+.animate-slow-zoom {
+  animation: slow-zoom 20s infinite alternate ease-in-out;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
