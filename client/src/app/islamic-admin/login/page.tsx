@@ -76,7 +76,7 @@ export default function AdminLoginPage() {
                                     type="email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    placeholder="admin@archive.tm"
+                                    placeholder="admin@AskYourMufti"
                                     required
                                     className="w-full pl-11 pr-4 py-3 rounded-xl border border-zinc-300 bg-white text-zinc-900 focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all placeholder:text-zinc-400"
                                 />
@@ -128,7 +128,7 @@ export default function AdminLoginPage() {
 
                 {/* Footer */}
                 <p className="text-center text-xs text-zinc-400 mt-8">
-                    Archive.TM &mdash; Authorized personnel only
+                    AskYourMufti &mdash; Authorized personnel only
                 </p>
             </div>
         </div>

@@ -28,7 +28,7 @@ const COPY: Record<string, Copy> = {
         badge: "آرکائیو کے بارے میں",
         title1: "علمی ورثے کی",
         title2: "حفاظت",
-        subtitle: "Archive.TM ایک منظم پلیٹ فارم ہے جہاں مفتی طارق مسعود کی تعلیمات محفوظ کی جاتی ہیں۔",
+        subtitle: "AskYourMufti ایک منظم پلیٹ فارم ہے جہاں مفتی طارق مسعود کی تعلیمات محفوظ کی جاتی ہیں۔",
         scholarLabel: "محققِ دین",
         scholarRole: "اسلامی عالم اور فقیہ",
         missionBadge: "ہمارا مقصد",
@@ -41,7 +41,7 @@ const COPY: Record<string, Copy> = {
         badge: "About the Archive",
         title1: "Preserving the Legacy of",
         title2: "Sacred Knowledge",
-        subtitle: "Archive.TM is a dedicated platform to organize, preserve, and share the teachings of Mufti Tariq Masood.",
+        subtitle: "AskYourMufti is a dedicated platform to organize, preserve, and share the teachings of Mufti Tariq Masood.",
         scholarLabel: "The Scholar",
         scholarRole: "Islamic Scholar & Jurist",
         missionBadge: "Our Mission",
@@ -72,13 +72,13 @@ const MILESTONES: Record<string, Array<{ year: string; title: string; desc: stri
         { year: "2010", title: "دعوت کا آغاز", desc: "مقامی دروس سے علمی سفر کا آغاز۔" },
         { year: "2015", title: "ڈیجیٹل توسیع", desc: "بیانات آن لائن ہوئے اور عالمی سامعین تک رسائی بڑھی۔" },
         { year: "2020", title: "عالمی پہچان", desc: "سوشل پلیٹ فارمز پر لاکھوں ناظرین تک رسائی۔" },
-        { year: "2024", title: "Archive.TM آغاز", desc: "تعلیمات کو منظم اور محفوظ کرنے کے لیے ڈیجیٹل آرکائیو۔" },
+        { year: "2024", title: "AskYourMufti آغاز", desc: "تعلیمات کو منظم اور محفوظ کرنے کے لیے ڈیجیٹل آرکائیو۔" },
     ],
     en: [
         { year: "2010", title: "Beginning of Dawah", desc: "Mufti Tariq Masood began spreading Islamic knowledge through local lectures." },
         { year: "2015", title: "Digital Expansion", desc: "Lectures were made available online to a global audience." },
         { year: "2020", title: "Global Recognition", desc: "Millions of viewers across YouTube and social media platforms." },
-        { year: "2024", title: "Archive.TM Launch", desc: "A structured digital archive to preserve and organize teachings." },
+        { year: "2024", title: "AskYourMufti Launch", desc: "A structured digital archive to preserve and organize teachings." },
     ],
 };
 

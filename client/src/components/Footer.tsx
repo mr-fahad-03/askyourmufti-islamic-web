@@ -51,7 +51,7 @@ export const Footer = () => {
                                 TM
                             </div>
                             <div>
-                                <span className="font-serif font-bold text-xl text-primary leading-none block">Archive.TM</span>
+                                <span className="font-serif font-bold text-xl text-primary leading-none block">AskYourMufti</span>
                                 <span className="text-[10px] uppercase tracking-[0.2em] leading-none block text-accent mt-1">{t(locale, "footer.brand_tag")}</span>
                             </div>
                         </Link>
@@ -124,7 +124,7 @@ export const Footer = () => {
 
                 <div className="flex flex-col md:flex-row justify-between items-center gap-4">
                     <p className="text-xs text-gray-400 tracking-wide">
-                        (c) {new Date().getFullYear()} Archive.TM - {t(locale, "footer.rights")}
+                        (c) {new Date().getFullYear()} AskYourMufti - {t(locale, "footer.rights")}
                     </p>
                     <div className="flex items-center gap-6 text-xs text-gray-400">
                         <Link href="#" className="hover:text-accent transition-colors">{t(locale, "footer.terms")}</Link>

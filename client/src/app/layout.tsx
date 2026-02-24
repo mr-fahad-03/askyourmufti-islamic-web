@@ -15,8 +15,13 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-    title: "Archive.TM - Digital Library of Knowledge",
+    title: "AskYourMufti - Digital Library of Knowledge",
     description: "Preserving the teachings of Mufti Tariq Masood",
+    icons: {
+        icon: "/vercel.svg",
+        shortcut: "/vercel.svg",
+        apple: "/vercel.svg",
+    },
 };
 
 export default async function RootLayout({

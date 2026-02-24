@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, Menu, Globe, ChevronDown, X, MessageCircle, Heart } from "lucide-react";
@@ -74,12 +75,15 @@ export const Navbar = () => {
             >
                 <div className="max-w-7xl mx-auto flex items-center justify-between px-4 md:px-8 py-3">
                     <Link href={localize("/")} className="flex items-center gap-2 shrink-0">
-                        <div className="w-9 h-9 rounded-full bg-accent/15 border border-accent/30 flex items-center justify-center">
-                            <span className="text-accent text-lg">✦</span>
-                        </div>
-                        <span className="text-xl md:text-2xl font-serif font-bold text-primary tracking-tight">
-                            ARCHIVE<span className="text-accent">.TM</span>
-                        </span>
+                        <Image
+                            src="/logo.png"
+                            alt="Ask Your Mufti Logo"
+                            width={220}
+                            height={220}
+                            className="rounded-full object-cover border border-accent/30"
+                            priority
+                        />
+                       
                     </Link>
 
                     <div className="hidden lg:flex items-center gap-1">
@@ -138,10 +142,10 @@ export const Navbar = () => {
                             {t(currentLocale, "nav.about")}
                         </Link>
 
-                        <Link href={localize("/donate")} className="flex items-center gap-2 px-5 py-2.5 bg-accent text-white text-sm font-bold tracking-wide rounded-full hover:bg-accent-light transition-all shadow-md shadow-accent/25 hover:shadow-lg hover:shadow-accent/30 hover:-translate-y-0.5">
+                        {/* <Link href={localize("/donate")} className="flex items-center gap-2 px-5 py-2.5 bg-accent text-white text-sm font-bold tracking-wide rounded-full hover:bg-accent-light transition-all shadow-md shadow-accent/25 hover:shadow-lg hover:shadow-accent/30 hover:-translate-y-0.5">
                             <Heart size={15} fill="currentColor" />
                             {t(currentLocale, "nav.donate")}
-                        </Link>
+                        </Link> */}
                     </div>
 
                     <div className="flex items-center gap-3">
