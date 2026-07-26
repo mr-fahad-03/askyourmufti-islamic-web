@@ -279,24 +279,50 @@ const bulkUploadFAQs = async (req, res) => {
 
         const createdTopics = await ensureTopicsFromBulkRows(rows);
 
-        const incomingQids  = rows.map(r => r.Q_ID).filter(Boolean);
-        const incomingSlugs = rows.map(r => r.Slug).filter(Boolean);
+        // Fetch all existing qids and slugs from DB to build sets of used values
+        const allFaqs = await FAQ.find({}, "qid slug").lean();
+        const usedQids  = new Set(allFaqs.map(f => f.qid).filter(Boolean));
+        const usedSlugs = new Set(allFaqs.map(f => f.slug).filter(Boolean));
 
-        const existingFaqs = await FAQ.find({
-            $or: [
-                { qid:  { $in: incomingQids  } },
-                { slug: { $in: incomingSlugs } }
-            ]
-        }, "qid slug");
+        const toInsert = rows.map((row, index) => {
+            // Determine QID
+            let rawQid = row.Q_ID ? String(row.Q_ID).trim() : '';
+            if (!rawQid) {
+                rawQid = `Q-${Date.now()}-${index}`;
+            }
 
-        const existingQids  = new Set(existingFaqs.map(f => f.qid));
-        const existingSlugs = new Set(existingFaqs.map(f => f.slug));
+            // Resolve QID conflicts (both within the batch and in the database)
+            let qid = rawQid;
+            if (usedQids.has(qid)) {
+                let suffix = 2;
+                while (usedQids.has(`${rawQid}-${suffix}`)) {
+                    suffix += 1;
+                }
+                qid = `${rawQid}-${suffix}`;
+            }
+            usedQids.add(qid);
 
-        const toInsert = rows
-            .filter(row => !existingQids.has(row.Q_ID) && !existingSlugs.has(row.Slug))
-            .map(row => ({
-                qid:           row.Q_ID,
-                sessionNumber: row.Session,
+            // Determine Slug
+            let rawSlug = row.Slug ? slugify(row.Slug) : slugify(row.Question_EN || row.Question || 'question');
+            if (!rawSlug) {
+                rawSlug = 'question';
+            }
+
+            // Resolve Slug conflicts (both within the batch and in the database)
+            let slug = rawSlug;
+            if (usedSlugs.has(slug)) {
+                let suffix = 2;
+                while (usedSlugs.has(`${rawSlug}-${suffix}`)) {
+                    suffix += 1;
+                }
+                slug = `${rawSlug}-${suffix}`;
+            }
+            usedSlugs.add(slug);
+
+            return {
+                qid,
+                slug,
+                sessionNumber: row.Session || "0",
                 timestamp:     row.Timestamp,
 
                 // English (primary)
@@ -307,14 +333,13 @@ const bulkUploadFAQs = async (req, res) => {
                 seoMetaDescription: row.Meta_Desc_EN || row.Meta_Description_EN || row.Meta_Description || "",
 
                 // Shared
-                topic:         row.Topic,
+                topic:         row.Topic || "General",
                 subtopic:      row.Subtopic,
                 keywords:      typeof row.Keywords === 'string'
                                    ? row.Keywords.split(',').map(k => k.trim()).filter(Boolean)
                                    : [],
                 questionerName: row.Questioner_Name,
                 location:       row.Location,
-                slug:           row.Slug,
 
                 // Translations
                 translations: {
@@ -347,7 +372,8 @@ const bulkUploadFAQs = async (req, res) => {
                         seoMetaDescription: row.Meta_Desc_FR || row.Meta_Description_FR || "",
                     },
                 },
-            }));
+            };
+        });
 
         if (toInsert.length > 0) {
             await FAQ.insertMany(toInsert);
@@ -357,7 +383,7 @@ const bulkUploadFAQs = async (req, res) => {
             success:   true,
             processed: rows.length,
             inserted:  toInsert.length,
-            skipped:   rows.length - toInsert.length,
+            skipped:   0,
             topicsCreated: createdTopics,
         });
     } catch (error) {
